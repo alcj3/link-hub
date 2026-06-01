@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arturo Lopez Chavez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: oklch(0.972 0.009 85);
+    --bg-2: oklch(0.987 0.006 85);
+    --ink: oklch(0.27 0.012 60);
+    --ink-soft: oklch(0.48 0.012 60);
+    --ink-faint: oklch(0.62 0.012 60);
+    --line: oklch(0.9 0.01 75);
+    --line-soft: oklch(0.93 0.008 75);
+    --accent: oklch(0.55 0.11 300);
+    --accent-soft: oklch(0.55 0.11 300 / 0.1);
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Hanken Grotesk", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { background: var(--bg); }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    padding: clamp(28px, 8vh, 72px) 22px clamp(40px, 10vh, 88px);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 392px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- intro ---- */
+  .wave {
+    font-size: 30px;
+    line-height: 1;
+    display: inline-block;
+    transform-origin: 70% 75%;
+    margin-bottom: 22px;
+  }
+
+  .greeting {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(27px, 8.5vw, 33px);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .greeting .em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .smiley { white-space: nowrap; }
+
+  /* ---- identity ---- */
+  .identity {
+    margin-top: 30px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .roles {
+    margin-top: 11px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px 10px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.005em;
+  }
+  .roles .dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+    opacity: 0.7;
+  }
+  .roles b { font-weight: 600; color: var(--ink); }
+
+  /* ---- links ---- */
+  .links {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 6px 17px 4px;
+    border-bottom: 1px solid var(--line-soft);
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+    transition: padding-left 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .link .ico {
+    flex: none;
+    width: 34px; height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .link .ico svg { width: 17px; height: 17px; display: block; }
+
+  .link .body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .link .label {
+    font-size: 15.5px;
+    font-weight: 500;
+    letter-spacing: 0.002em;
+    transition: color 0.22s ease;
+  }
+  .link .sub {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+  }
+
+  .link .arrow {
+    margin-left: auto;
+    flex: none;
+    color: var(--ink-faint);
+    transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.22s ease, opacity 0.22s ease;
+    opacity: 0.55;
+  }
+  .link .arrow svg { width: 16px; height: 16px; display: block; }
+
+  /* hover / focus (devices that can hover) */
+  @media (hover: hover) {
+    .link:hover .ico {
+      color: var(--accent);
+      border-color: color-mix(in oklch, var(--accent) 35%, var(--line));
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+    .link:hover .label { color: var(--accent); }
+    .link:hover .arrow { transform: translateX(4px); color: var(--accent); opacity: 1; }
+  }
+  .link:active .ico { transform: scale(0.95); }
+  .link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  /* soon row */
+  .link.soon { cursor: default; }
+  .link.soon .ico {
+    border-style: dashed;
+    background: transparent;
+    color: var(--ink-faint);
+  }
+  .link.soon .label { color: var(--ink-soft); }
+  .link.soon .pill {
+    margin-left: auto;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 9px;
+  }
+
+  /* ---- footer ---- */
+  .foot {
+    margin-top: 26px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .foot .ping {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-soft);
+    animation: ping 2.6s ease-out infinite;
+  }
+  @keyframes ping {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--accent) 32%, transparent); }
+    70%, 100% { box-shadow: 0 0 0 7px transparent; }
+  }
+
+  /* ---- load animation ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: rise 0.7s cubic-bezier(0.22, 0.7, 0.18, 1) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+    .wave { animation: wave 2.4s ease-in-out 0.9s 2; }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(-4deg); }
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <span class="wave reveal" style="--d: 60ms" aria-hidden="true">👋</span>
+
+    <h1 class="greeting reveal" style="--d: 140ms">
+      Hi, it was nice <span class="em">meeting you</span>. Check out my LinkedIn and GitHub — I'd love to connect and chat more <span class="smiley">:)</span>
+    </h1>
+
+    <section class="identity reveal" style="--d: 260ms">
+      <div class="name">Arturo Lopez Chavez</div>
+      <div class="roles">
+        <span><b>INFO</b> @ UW</span>
+        <span class="dot"></span>
+        <span>Incoming <b>AI + Data</b> @ Brooks</span>
+        <span class="dot"></span>
+        <span>Prev @ Fluke</span>
+      </div>
+    </section>
+
+    <nav class="links">
+      <a class="link reveal" style="--d: 360ms" href="https://www.linkedin.com/in/alopez115/" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.25 8h4.5v15H.25V8zm7.5 0h4.31v2.05h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V23h-4.5v-6.5c0-1.55-.03-3.55-2.16-3.55-2.16 0-2.49 1.69-2.49 3.43V23h-4.5V8z"/></svg>
+        </span>
+        <span class="body">
+          <span class="label">LinkedIn</span>
+          <span class="sub">in/alopez115</span>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a class="link reveal" style="--d: 440ms" href="https://github.com/alcj3" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.5l-.01-1.76c-2.92.63-3.54-1.4-3.54-1.4-.48-1.22-1.17-1.54-1.17-1.54-.95-.65.07-.64.07-.64 1.06.07 1.61 1.09 1.61 1.09.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.33-.27-4.78-1.17-4.78-5.18 0-1.15.41-2.08 1.08-2.82-.11-.27-.47-1.34.1-2.79 0 0 .88-.28 2.88 1.07a9.96 9.96 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.57 1.45.21 2.52.1 2.79.67.74 1.08 1.67 1.08 2.82 0 4.02-2.46 4.9-4.8 5.16.38.33.71.97.71 1.96l-.01 2.9c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        </span>
+        <span class="body">
+          <span class="label">GitHub</span>
+          <span class="sub">@alcj3</span>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a class="link reveal" style="--d: 520ms" href="https://drive.google.com/file/d/1VmUBwdrEQ7M-8cVe0_afZOepZdhHponY/view?usp=sharing" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7A1.5 1.5 0 0 0 5.5 4v16A1.5 1.5 0 0 0 7 21.5h10a1.5 1.5 0 0 0 1.5-1.5V7L14 2.5z"/><path d="M14 2.5V7h4.5M9 12.5h6M9 16h6M9 9h2"/></svg>
+        </span>
+        <span class="body">
+          <span class="label">Résumé</span>
+          <span class="sub">PDF · opens in Drive</span>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a class="link reveal" style="--d: 600ms" href="/cdn-cgi/l/email-protection#670b0817021d56565227121049020312">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+        </span>
+        <span class="body">
+          <span class="label">Email</span>
+          <span class="sub"><span class="__cf_email__" data-cfemail="b5d9dac5d0cf848480f5c0c29bd0d1c0">[email&#160;protected]</span></span>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <div class="link soon reveal" style="--d: 680ms" aria-disabled="true">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 2"/></svg>
+        </span>
+        <span class="body">
+          <span class="label">More</span>
+          <span class="sub">portfolio &amp; projects</span>
+        </span>
+        <span class="pill">Soon</span>
+      </div>
+    </nav>
+
+    <div class="foot reveal" style="--d: 850ms">
+      <span class="ping" aria-hidden="true"></span>
+      <span>Let's stay in touch</span>
+    </div>
+  </main>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
